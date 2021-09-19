@@ -9,6 +9,7 @@ public class DragonScript : MonoBehaviour {
 	private Animator myAnimator;
 	private float jumpForce;
 	public bool isAlive;
+	public GameObject GameOver;
 
 	void Start () {
 		isAlive = true;
@@ -18,7 +19,6 @@ public class DragonScript : MonoBehaviour {
 
 		jumpForce = 10f;
 		myRigidBody.gravityScale = 5f;
-
 	}
 		
 
@@ -46,7 +46,7 @@ public class DragonScript : MonoBehaviour {
 		if (target.gameObject.tag == "Obstacles") {
 			isAlive = false;
 			Time.timeScale = 0f;
-            SceneManager.LoadScene(sceneName: "Death");
+            GameOver.SetActive(true);
         }
 	}
 
@@ -54,7 +54,7 @@ public class DragonScript : MonoBehaviour {
 		if (Mathf.Abs(gameObject.transform.position.y) > 5.3f) {
 			isAlive = false;
 			Time.timeScale = 0f;
-            SceneManager.LoadScene(sceneName: "Death");
+            GameOver.SetActive(true);
         }
 	}
 }
