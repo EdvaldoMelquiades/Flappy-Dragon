@@ -21,8 +21,7 @@ public class ObstacleScript : MonoBehaviour {
 
 		isScoreAdded = false;
 
-		gameManager = GameObject.Find ("GameManager")
-			.GetComponent<GameManagerScript> ();
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManagerScript> ();
 	}
 
 	void Update() {
@@ -41,5 +40,4 @@ public class ObstacleScript : MonoBehaviour {
 	void AddScore(){
 		gameManager.GmAddScore();
 	}
-
 }

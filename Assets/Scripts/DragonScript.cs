@@ -10,6 +10,9 @@ public class DragonScript : MonoBehaviour {
 	public bool isAlive;
 	public GameObject GameOver;
 
+	// Get GameManagerScript cript
+	GameManagerScript gameManager;
+
 	void Start () {
 		isAlive = true;
 
@@ -18,10 +21,10 @@ public class DragonScript : MonoBehaviour {
 
 		jumpForce = 10f;
 		myRigidBody.gravityScale = 5f;
+
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManagerScript> ();
 	}
 		
-
-	// Update is called once per frame
 	void Update () {
 		if (isAlive) {
 			if (Input.GetMouseButton (0)) {
@@ -43,8 +46,19 @@ public class DragonScript : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D target) {
 		if (target.gameObject.tag == "Obstacles") {
+			// Set Dragon dead
 			isAlive = false;
+
+			// Pause game
 			Time.timeScale = 0f;
+
+			// Save score
+			if (gameManager.myScore > PlayerPrefs.GetInt("highscore")){
+				PlayerPrefs.SetInt("highscore", gameManager.myScore);
+				PlayerPrefs.Save();
+			}
+
+			// Enable Game Over menu
             GameOver.SetActive(true);
         }
 	}
