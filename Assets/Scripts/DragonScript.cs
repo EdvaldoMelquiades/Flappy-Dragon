@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,10 +8,10 @@ public class DragonScript : MonoBehaviour {
 	private Animator myAnimator;
 	private float jumpForce;
 	public bool isAlive;
-	public GameObject GameOver;
+	
+	public GameObject GameOver; // Get Game Over Menu object
 
-	// Get GameManagerScript cript
-	GameManagerScript gameManager;
+	GameManagerScript gameManager; // Get GameManagerScript script
 
 	void Start () {
 		isAlive = true;
@@ -35,39 +35,34 @@ public class DragonScript : MonoBehaviour {
 	}
 
 
-	void Flap(){
-		myRigidBody.velocity = 
-			new Vector2 (0,jumpForce);
+	void Flap() {
+		myRigidBody.velocity = new Vector2 (0,jumpForce);
 		
 		myAnimator.SetTrigger ("Flap");
-
 	}
 
 
 	void OnCollisionEnter2D(Collision2D target) {
 		if (target.gameObject.tag == "Obstacles") {
-			// Set Dragon dead
-			isAlive = false;
-
-			// Pause game
-			Time.timeScale = 0f;
+			DeadState();
 
 			// Save score
 			if (gameManager.myScore > PlayerPrefs.GetInt("highscore")){
 				PlayerPrefs.SetInt("highscore", gameManager.myScore);
 				PlayerPrefs.Save();
 			}
-
-			// Enable Game Over menu
-            GameOver.SetActive(true);
         }
 	}
 
 	void CheckIfDragonVisibleOnScreen() {
 		if (Mathf.Abs(gameObject.transform.position.y) > 5.3f) {
-			isAlive = false;
-			Time.timeScale = 0f;
-            GameOver.SetActive(true);
+			DeadState();
         }
 	}
+
+	void DeadState() {
+		isAlive = false;
+		Time.timeScale = 0f;
+        GameOver.SetActive(true);
+		}
 }

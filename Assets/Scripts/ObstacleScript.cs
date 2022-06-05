@@ -16,8 +16,7 @@ public class ObstacleScript : MonoBehaviour {
 		myRigidbody = gameObject.GetComponent<Rigidbody2D> ();
 		myRigidbody.velocity = new Vector2 (-2.5f,0);
 
-		dragonXposition = 
-			GameObject.Find("Dragon").transform.position.x;
+		dragonXposition = GameObject.Find("Dragon").transform.position.x;
 
 		isScoreAdded = false;
 

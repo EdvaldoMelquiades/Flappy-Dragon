@@ -10,17 +10,21 @@ public class GameManagerScript : MonoBehaviour {
 
 	public Transform bottomObstacle,topObstacle;
 
-	private AudioSource audioSource;
+	public GameObject PressStart;
 
+	private AudioSource audioSource;
 
 	// Use this for initialization
 	void Start (){
 		myScore = 0;
+
 		myScoreGUI = GameObject.Find ("Score").GetComponent<Text> ();
 
-		InvokeRepeating ("ObstacleSpawner", .5f, 1.5f);
+		Time.timeScale = 0f;
+	}
 
-		audioSource = gameObject.GetComponent<AudioSource> ();
+	void Update (){
+		WaiStart();
 	}
 		
 	public void GmAddScore (){
@@ -28,7 +32,6 @@ public class GameManagerScript : MonoBehaviour {
 		myScoreGUI.text = myScore.ToString();
 		audioSource.Play ();
 	}
-
 
 	public void ObstacleSpawner (){
 		int rand = Random.Range (0, 2);
@@ -48,18 +51,26 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	public void RestartButton (){
-		//PlayerPrefs.SetInt("highscore", myScore);
-		//PlayerPrefs.Save();
 		SceneManager.LoadScene(sceneName: "Game");
 		Time.timeScale = 1f; 
 	}
 
     public void BackButton (){
-		//PlayerPrefs.SetInt("highscore", myScore);
-		//PlayerPrefs.Save();
         SceneManager.LoadScene(sceneName: "Menu");
 		Time.timeScale = 1f; 
     }
+
+	private void WaiStart (){
+		if (Input.GetKeyDown(KeyCode.Space)){
+			Time.timeScale = 1f;
+
+			PressStart.SetActive(false);
+
+			InvokeRepeating ("ObstacleSpawner", .5f, 1.5f);
+
+			audioSource = gameObject.GetComponent<AudioSource> ();
+		}
+	}
 }
 
 
