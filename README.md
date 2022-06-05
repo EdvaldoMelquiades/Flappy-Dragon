@@ -1,8 +1,6 @@
 # Flappy Dragon
 
-## How to play:
-Left mouse button click to make the Dragon flap wings and go up.
+This game is a clone of the famous flappy bird game.  
+Project developed for non-commercial purposes.  
 
-## Still to do:
-* Put a countdown timer (3,2,1) before the match starts. 
-* Make the UI more responsive.
+Made with C# and Unity.
