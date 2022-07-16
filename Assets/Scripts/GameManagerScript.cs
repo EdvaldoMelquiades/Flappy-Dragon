@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour {
 	public int myScore;
+
 	public Text myScoreGUI;
+	public GameObject startButton;
 
-	public Transform bottomObstacle,topObstacle;
-
-	public GameObject PressStart;
+	public Transform bottomObstacle, topObstacle;
 
 	private AudioSource audioSource;
 
@@ -21,10 +21,6 @@ public class GameManagerScript : MonoBehaviour {
 		myScoreGUI = GameObject.Find ("Score").GetComponent<Text> ();
 
 		Time.timeScale = 0f;
-	}
-
-	void Update (){
-		WaiStart();
 	}
 		
 	public void GmAddScore (){
@@ -60,16 +56,11 @@ public class GameManagerScript : MonoBehaviour {
 		Time.timeScale = 1f; 
     }
 
-	private void WaiStart (){
-		if (Input.GetKeyDown(KeyCode.Space)){
-			Time.timeScale = 1f;
-
-			PressStart.SetActive(false);
-
-			InvokeRepeating ("ObstacleSpawner", .5f, 1.5f);
-
-			audioSource = gameObject.GetComponent<AudioSource> ();
-		}
+	public void StartButton (){
+		Time.timeScale = 1f;
+		startButton.SetActive(false);
+		InvokeRepeating ("ObstacleSpawner", .5f, 1.5f);
+		audioSource = gameObject.GetComponent<AudioSource> ();
 	}
 }
 
