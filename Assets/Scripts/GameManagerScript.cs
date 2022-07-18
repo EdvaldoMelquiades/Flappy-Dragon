@@ -12,9 +12,6 @@ public class GameManagerScript : MonoBehaviour {
 
 	public Transform bottomObstacle, topObstacle;
 
-	private AudioSource audioSource;
-
-	// Use this for initialization
 	void Start (){
 		myScore = 0;
 
@@ -26,7 +23,6 @@ public class GameManagerScript : MonoBehaviour {
 	public void GmAddScore (){
 		this.myScore++;
 		myScoreGUI.text = myScore.ToString();
-		audioSource.Play ();
 	}
 
 	public void ObstacleSpawner (){
@@ -60,7 +56,6 @@ public class GameManagerScript : MonoBehaviour {
 		Time.timeScale = 1f;
 		startButton.SetActive(false);
 		InvokeRepeating ("ObstacleSpawner", .5f, 1.5f);
-		audioSource = gameObject.GetComponent<AudioSource> ();
 	}
 }
 
